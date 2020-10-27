@@ -1,0 +1,25 @@
+import pymysql
+conn = pymysql.connect(
+    host='localhost',
+    port=3307,
+    user='root',
+    password='root',
+    database='ba',
+    charset='utf8'
+)
+cursor = conn.cursor()
+sql1 = """show tables;
+"""
+
+cursor.execute(sql1)
+cursor.fetchone()
+('meal_order_detail1',)
+sql2="""select * from meal_order_detail1 where dishes_id = '610062'
+"""
+cursor.execute(sql2)
+cursor2 = conn.cursor(cursor=pymysql.cursors.DictCursor)
+cursor.execute(sql2)
+
+ret1 = cursor2.fetchone()
+ret2 = cursor2.fetchmany(3)
+ret3 = cursor2.fetchone()
